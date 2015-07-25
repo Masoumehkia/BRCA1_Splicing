@@ -1,3 +1,6 @@
+# if (!require("devtools")) install.packages("devtools") #Uncomment if you need to install the library.
+# devtools::install_github("rstudio/d3heatmap")
+
 library(d3heatmap)
 
 d = read.csv("data/exon2_for_r.csv")

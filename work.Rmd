@@ -1,0 +1,40 @@
+---
+title: "work"
+author: "Christina Yu and Nick Strayer"
+date: "July 25, 2015"
+output: html_document
+---
+
+So we have to first load the library. 
+```{r}
+library(d3heatmap)
+```
+
+# The fun stuff:
+
+### Data munging. 
+
+```{r}
+#Load the data in. 
+d = read.csv("data/exon2_for_r.csv")
+
+#Combine the first two rows for create unique row names. 
+rowNames <- paste(d$position, d$base, sep = "-")
+
+#Drop the non-numeric data
+d = d[,c(-1,-2,-7)]
+
+#Turn NAs into 0s. Hopefully we can change this soon. 
+d[is.na(d)] <- 0
+
+#Assign the row names and rename the columns to make them simpler. 
+rownames(d) <- rowNames
+colnames(d) <- c("a", "t", "g", "c")
+```
+
+
+### ...and now we plot. 
+```{r}
+d3heatmap(d, scale = "column", colors = "Spectral", Rowv = NULL, Colv = NULL)
+```
+
